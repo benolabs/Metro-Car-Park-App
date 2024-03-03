@@ -1,0 +1,23 @@
+doctype html 
+html 
+    head 
+      link(rel="stylesheet" href="style.css")
+
+    body
+        table.tablestyle
+            thead 
+                tr 
+                  th Notification
+                  th Priority
+                  th Information
+                  th Start Time
+
+            tbody 
+                each i in notifications.infos.current
+                  tr
+                    td(style="font-weight: bold;")= i.urlText  
+                    td= i.priority
+                    td= i.properties.speechText
+                    each timestamp in i.timestamps.validity
+                      td= moment(timestamp.from).format("dddd, MMMM Do YYYY, h:mm:ss a")
+                

@@ -1,0 +1,126 @@
+doctype html 
+html 
+    head 
+        link(rel="stylesheet" href="style.css")
+        link(href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous")
+        script(src='https://cdnjs.cloudflare.com/ajax/libs/axios/0.27.2/axios.min.js')
+        script(src='https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.30.1/moment.min.js')
+        meta(name="viewport" content="width=device-width, initial-scale=1")
+
+    body
+      form(id= "form")
+        select(id= "selector" name= "station")
+          each station, key in { "6": "Gordon Henry St North Car Park", "7": "Kiama Car Park", "8": "Gosford Car Park", "9": "Revesby Car Park", "10": "Warriewood Car Park", "11": "Narrabeen Car Park", "12": "Mona Vale Car Park", "13": "Dee Why Car Park", "14": "West Ryde Car Park", "15": "Sutherland East Parade Car Park", "16": "Leppington Car Park", "17": "Edmondson Park South Car Park", "18": "St Marys Car Park", "19": "Campbelltown Farrow Rd North Car Park", "20": "Campbelltown Hurley Street South Car Park", "21": "Penrith Combewood At-Grade Car Park", "22": "Penrith Combewood Multi-Level Car Park", "23": "Warwick Farm Car Park", "24": "Schofields Car Park", "25": "Hornsby Jersey St Car Park", "26": "Tallawong P1 Car Park", "27": "Tallawong P2 Car Park", "28": "Tallawong P3 Car Park", "29": "Kellyville North Car Park", "30": "Kellyville South Car Park", "31": "Bella Vista Car Park", "32": "Hills Showground Car Park", "33": "Cherrybrook Car Park", "486": "Ashfield Car Park", "487": "Kogarah Car Park", "488": "Seven Hills Car Park", "489": "Manly Vale Car Park", "490": "Brookvale Car Park"}
+            option(value= key)= station
+        input(type='submit', value='Submit')
+ 
+      script(src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous")
+      script.
+        showResult()
+        function showResult() {
+        
+        let select = document.getElementById("selector")
+        select.addEventListener("change", function () {
+        let data = select.value
+        console.log(data)
+        })
+        const form = document.querySelector("form")
+        form.addEventListener('submit', async (e) => {
+        try {
+        e.preventDefault();
+        const formData = new FormData(form)
+        res = await axios.post('http://127.0.0.1:3000/carpark', formData);
+        document.getElementById('tableresults').style.visibility='visible'
+        document.getElementById("facilityname").textContent = res.data.facilityname
+        document.getElementById("totalspots").textContent = res.data.totalspots
+        document.getElementById("occupiedspots").textContent = res.data.occupiedspots
+        document.getElementById("availablespots").textContent = res.data.availablespots
+        document.getElementById("availablespotspercentage").innerHTML = res.data.availablespotspercentage + '% Free'
+        const messageDate =  res.data.messageDate
+        const totalspots = res.data.totalspots
+        createChart(messageDate, totalspots)
+        } catch(err) {
+        console.log(err)
+        }
+        })
+        }
+
+        function createChart(messageDate, totalspots){
+          const ctx = document.getElementById('myChart')
+          let chartStatus = Chart.getChart("myChart"); // <canvas> id
+          if (chartStatus != undefined) {
+            chartStatus.destroy();
+          }
+          newArray = messageDate.map(row => row.MessageDate)
+          formattedmessageDate = newArray.map(row => moment(row).format("HH:mm"));
+          console.log(messageDate)
+          console.log(formattedmessageDate)
+          var mainChart = new Chart(ctx, {
+            type: 'bar',
+            data: {
+              labels: formattedmessageDate,
+              datasets: [{
+                label: 'Occupied Spots',
+                data: messageDate.map(row => row.occupancy.total),
+                borderWidth: 1
+              }]
+            },
+            options: {
+              scales: {
+                x: {
+                  title: {
+                  display: true,
+                  text: 'Time of day'
+                  }, 
+                  ticks: {
+                    maxTicksLimit: 24
+                  }
+                },
+                y: {
+                  title: {
+                  display: true,
+                  text: '# of Parking Spots'
+                  }, 
+                  beginAtZero: true,
+                  min: 0,
+                  max: Math.round(totalspots)
+                }
+              }
+            }
+          
+          })
+        };
+       
+
+    br
+    br
+    br
+
+    table(id = "tableresults").carparktablestyle
+        thead 
+            tr 
+              th Facility Name
+              th Total Parking Spots
+              th Total Occupied Spots
+              th Total Available Spots
+              th Available Spots %
+ 
+        tbody
+            tr
+                td(id = "facilityname")
+                td(id = "totalspots")
+                td(id = "occupiedspots")
+                td(id = "availablespots")
+                td(id = "availablespotspercentage")
+
+    div(id ="max")     
+    div(class="chart-wrapper") 
+        canvas(id="myChart")
+
+    script(src="https://cdn.jsdelivr.net/npm/chart.js")
+    script(src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns/dist/chartjs-adapter-date-fns.bundle.min.js")
+
+
+          
+
+    
