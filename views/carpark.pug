@@ -31,10 +31,12 @@ html
         const formData = new FormData(form)
         res = await axios.post('http://127.0.0.1:3000/carpark', formData);
         document.getElementById('tableresults').style.visibility='visible'
+        document.getElementById('title').style.visibility='visible'
         document.getElementById("facilityname").textContent = res.data.facilityname
         document.getElementById("totalspots").textContent = res.data.totalspots
         document.getElementById("occupiedspots").textContent = res.data.occupiedspots
         document.getElementById("availablespots").textContent = res.data.availablespots
+        document.getElementById("lastweekDateTitle").innerHTML = res.data.lastweekDateTitle
         document.getElementById("availablespotspercentage").innerHTML = res.data.availablespotspercentage + '% Free'
         const messageDate =  res.data.messageDate
         const totalspots = res.data.totalspots
@@ -90,12 +92,7 @@ html
           
           })
         };
-       
-
-    br
-    br
-    br
-
+    
     table(id = "tableresults").carparktablestyle
         thead 
             tr 
@@ -104,7 +101,7 @@ html
               th Total Occupied Spots
               th Total Available Spots
               th Available Spots %
- 
+
         tbody
             tr
                 td(id = "facilityname")
@@ -113,7 +110,11 @@ html
                 td(id = "availablespots")
                 td(id = "availablespotspercentage")
 
-    div(id ="max")     
+    
+    div(id ="max")    
+    div(id = "title") 
+      h6 Historical parking data on <span id = "lastweekDateTitle"></span>
+      p The below graph displays the historic parking data on the same day last week to provide you an idea of how many parking spots were occupied on that day.
     div(class="chart-wrapper") 
         canvas(id="myChart")
 

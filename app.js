@@ -63,6 +63,8 @@ app.post('/carpark', upload.any(), async (req, res) => {
     const date = new Date();
     const lastweekDate = date.setDate(date.getDate() - 7);
     const lastweekDateFormatted = moment(lastweekDate).format("YYYY-MM-DD")
+    const lastweekDateTitle = moment(lastweekDate).format("dddd MMM Do YYYY")
+    console.log(lastweekDateTitle)
 
 
     let endpoints = [
@@ -95,6 +97,7 @@ app.post('/carpark', upload.any(), async (req, res) => {
                 availablespots: availablespots,
                 availablespotspercentage: availablespotspercentage,
                 messageDate: messageDate,
+                lastweekDateTitle: lastweekDateTitle,
                 moment: moment
             })
         })
