@@ -107,6 +107,6 @@ app.post('/carpark', upload.any(), async (req, res) => {
     }
 })
 
-app.listen(process.env.PORT, () => {
+app.listen(process.env.PORTNUM, () => {
     console.log("App listening")
 })
