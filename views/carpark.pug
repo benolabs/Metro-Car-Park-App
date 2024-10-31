@@ -29,7 +29,7 @@ html
         try {
         e.preventDefault();
         const formData = new FormData(form)
-        res = await axios.post('https://metrocarpark-k7tpk.ondigitalocean.app/carpark', formData);
+        res = await axios.post('https://metro.benolabs.com/carpark', formData);
         document.getElementById('tableresults').style.visibility='visible'
         document.getElementById('title').style.visibility='visible'
         document.getElementById("facilityname").textContent = res.data.facilityname
