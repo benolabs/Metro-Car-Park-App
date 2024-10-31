@@ -15,12 +15,7 @@ app.set("view engine", "pug")
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', async (req, res) => {
-    const { data } = await axios.get("https://jsonplaceholder.typicode.com/users")
-
-    res.render('index', {
-        users: data
-    })
-    console.log(data)
+    res.redirect('/carpark');
 })
 
 app.get('/metro', async (req, res) => {
