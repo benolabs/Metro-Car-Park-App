@@ -1,5 +1,4 @@
 
-
 #form {
   border: 1px solid #ccc; /* Add a border */
   padding: 20px; /* Add padding */
@@ -10,17 +9,34 @@
   margin: 100px auto auto auto;
 }
 
+.grid-Btn {
+  margin: 20px auto auto auto;
+  border: 1px solid #000000;
+  border-radius: 5px;
+  padding: 10px;
+  font-size: 0.9em;
+  color: #000000;
+}
+
 #title {
   margin: auto;
   width: 964px;
-  font-family: Georgia, serif;
+  font-family: DM Sans Variable, sans-serif;
   font-size: 13px;
   text-align: left;
   visibility: collapse;
 }
 
+#intro {
+  margin: auto;
+  width: 964px;
+  font-family: DM Sans Variable, sans-serif;
+  font-size: 13px;
+  text-align: left;
+}
+
 table.tablestyle {
-  font-family: Georgia, serif;
+  font-family: DM Sans Variable, sans-serif;
   border: 1px solid #FFFFFF;
   width: 964px;
   height: 100px;
@@ -58,7 +74,7 @@ table.tablestyle tfoot td {
 }
 
 table.carparktablestyle {
-  font-family: Georgia, serif;
+  font-family: DM Sans Variable, sans-serif;
   border: 1px solid #FFFFFF;
   width: 964px;
   height: 100px;

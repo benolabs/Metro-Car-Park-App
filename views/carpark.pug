@@ -9,10 +9,12 @@ html
 
     body
       form(id= "form")
+        h4 METRO CARPARK APP
+        p Select a Metro station below, to check real time data on available parking spots.
         select(id= "selector" name= "station")
           each station, key in { "6": "Gordon Henry St North Car Park", "7": "Kiama Car Park", "8": "Gosford Car Park", "9": "Revesby Car Park", "10": "Warriewood Car Park", "11": "Narrabeen Car Park", "12": "Mona Vale Car Park", "13": "Dee Why Car Park", "14": "West Ryde Car Park", "15": "Sutherland East Parade Car Park", "16": "Leppington Car Park", "17": "Edmondson Park South Car Park", "18": "St Marys Car Park", "19": "Campbelltown Farrow Rd North Car Park", "20": "Campbelltown Hurley Street South Car Park", "21": "Penrith Combewood At-Grade Car Park", "22": "Penrith Combewood Multi-Level Car Park", "23": "Warwick Farm Car Park", "24": "Schofields Car Park", "25": "Hornsby Jersey St Car Park", "26": "Tallawong P1 Car Park", "27": "Tallawong P2 Car Park", "28": "Tallawong P3 Car Park", "29": "Kellyville North Car Park", "30": "Kellyville South Car Park", "31": "Bella Vista Car Park", "32": "Hills Showground Car Park", "33": "Cherrybrook Car Park", "486": "Ashfield Car Park", "487": "Kogarah Car Park", "488": "Seven Hills Car Park", "489": "Manly Vale Car Park", "490": "Brookvale Car Park"}
             option(value= key)= station
-        input(type='submit', value='Submit')
+        input(class='grid-Btn' type='submit', value='Check Parking')
  
       script(src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous")
       script.
@@ -81,7 +83,7 @@ html
                 y: {
                   title: {
                   display: true,
-                  text: '# of Parking Spots'
+                  text: 'No. of Parking Spots'
                   }, 
                   beginAtZero: true,
                   min: 0,
@@ -92,15 +94,15 @@ html
           
           })
         };
-    
+
     table(id = "tableresults").carparktablestyle
         thead 
             tr 
-              th Facility Name
+              th Metro Station
               th Total Parking Spots
               th Total Occupied Spots
               th Total Available Spots
-              th Available Spots %
+              th Available Spots free %
 
         tbody
             tr
@@ -113,7 +115,7 @@ html
     
     div(id ="max")    
     div(id = "title") 
-      h6 Historical parking data last <span id = "lastweekDateTitle"></span>
+      h5 Historical parking data for last <span id = "lastweekDateTitle"></span>
       p The below graph displays the historic parking data from one week ago. The graph below shows visual trends in parking availability and insights into the peak and off peak times during the day.
     div(class="chart-wrapper") 
         canvas(id="myChart")
