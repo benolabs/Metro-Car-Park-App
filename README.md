@@ -5,7 +5,7 @@ This web app enables commuters and travellers to check real time data on the ava
 The app aims to save time and reduce stress for commuters by knowing exactly where to park before they set out on their journey. 
 
 ### **Technology stack:**
-- **Javascript:** The backend of the application is built using a reliable webframework Express.js, leveraging Javascript libraries including Chart.js for visual graph data and Pug templating engine.
+- **Javascript:** The backend of the app is built using a reliable webframework Express.js, leveraging Javascript libraries including Chart.js for visual graph data and Pug templating engine.
 - **REST API:** The Car Park API from Transport Open Data (Transport for NSW), provides real time and historical occupancy of selected Park&Ride car parks.
 - **Traefik:** Traefik load balancer and reverse proxy
 - **Cloud Deployment:** Built and deployed to the Digital Ocean Cloud platform
